@@ -1,0 +1,39 @@
+﻿@model Kyckling.Web.Models.SelectDateModel
+@{
+    ViewBag.Title = "SelectDate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-4">
+    <fieldset>
+        <legend>Bokning</legend>
+        @using (Html.BeginForm("SelectDate", "Reservation", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Name)
+            <div class="form-group">
+                @Html.LabelFor(m => m.ReservationDate)
+                @Html.TextBoxFor(m => m.ReservationDate, new { id = "reservationDatePicker", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReservationDate)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.NumberOfPersons)
+                @Html.DropDownListFor(m => m.NumberOfPersons, Model.PersonCountList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.NumberOfPersons)
+            </div>
+            <input type="submit" value="Gå vidare" class="btn btn-default" />
+        }
+    </fieldset>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var d = new Date('@DateTime.Now.ToShortDateString()');
+            $("#reservationDatePicker").datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                startDate: d
+            });
+        })
+    </script>
+}

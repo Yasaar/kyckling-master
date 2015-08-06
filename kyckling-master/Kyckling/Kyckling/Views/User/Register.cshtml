@@ -1,0 +1,84 @@
+﻿@using System.Web.UI.WebControls
+@model Kyckling.Domain.Models.UserModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>Registration</legend>
+
+@if (ViewBag.message != null)
+{
+    <div style="border: solid 1px green">
+        @ViewBag.message
+    </div>
+}
+    
+            @*<div class="editor-label">
+                @Html.HiddenFor(model => model.UserId)
+            </div>
+            <div class="editor-field">
+                @Html.HiddenFor(model => model.UserId)
+                @Html.ValidationMessageFor(model => model.UserId)
+            </div>*@
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Email)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Firstname)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Firstname)
+                @Html.ValidationMessageFor(model => model.Firstname)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Lastname)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Lastname)
+                @Html.ValidationMessageFor(model => model.Lastname)
+            </div>
+    
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

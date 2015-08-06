@@ -1,0 +1,25 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger form-control">
+            <span class="glyphicon glyphicon-log-out"></span>
+            Logga ut
+        </button>
+    }
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Editera restaurang", "EditRestaurant", "Restaurant")</li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Mitt konto (" + User.Identity.Name + ")", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })</li>
+    </ul>
+
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Registrera", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

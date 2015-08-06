@@ -1,0 +1,134 @@
+﻿@using System.ComponentModel
+@model Kyckling.Web.Models.RestaurantModel
+
+@{
+    ViewBag.Title = "EditRestaurant";
+}
+@{
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+@section Style
+{
+    <style>
+    .img-resize {
+        width: auto;
+        height: 200px;
+    }
+</style>
+}
+<div class="col-md-4">
+    @using (Html.BeginForm("EditRestaurant", "Restaurant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Create new restaurant</legend>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.StreetAddress)
+                @Html.TextBoxFor(model => model.StreetAddress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StreetAddress)
+            </div>
+            <div class="form-groupl">
+                @Html.LabelFor(model => model.PostalCode)
+                @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PostalCode)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.City)
+                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.City)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Active)
+                @Html.EditorFor(model => model.Active)
+                @Html.ValidationMessageFor(model => model.Active)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MaxGuests)
+                @Html.TextBoxFor(model => model.MaxGuests, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaxGuests)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MaxPersonsBooking)
+                @Html.TextBoxFor(model => model.MaxPersonsBooking, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaxPersonsBooking)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DayCapacity)
+                @Html.TextBoxFor(model => model.DayCapacity, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DayCapacity)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Image)
+            </div>
+
+            @Html.HiddenFor(model => model.Id)
+
+            <table>
+                <tr>
+                    <td>
+                        <div>
+
+                            @Html.TextBoxFor(model => model.Image, new { type = "file" })
+                            @Html.ValidationMessageFor(model => model.Image)
+                        </div>
+                    </td>
+                    <td>
+                        <img src="@Model.ImageUrl" class="img-resize" />
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr><th>Day</th><th>Open Time</th><th>Closing Time</th></tr>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <tr>
+                        <td>@Model.OpenTimes[i].Day</td>
+                        <td>@Html.DropDownListFor(model => model.OpenTimes[i].OpeningTime, new SelectList(Enumerable.Range(01, 24), Model.OpenTimes[i].OpeningTime), new { @class = "form-control" })</td>
+                        <td>@Html.DropDownListFor(model => model.OpenTimes[i].ClosingTime, new SelectList(Enumerable.Range(01, 24), Model.OpenTimes[i].ClosingTime), new { @class = "form-control"})</td>
+                    </tr>
+                }
+            </table>
+            <div>
+                Stängda datum:
+                @Html.TextBoxFor(model => model.ClosedDates, new { id = "ClosedDates", @class = "form-control" })
+            </div>
+            @Html.HiddenFor(model => model.ImageUrl)
+            <p>
+                <input type="submit" value="Spara" class="btn btn-success"/>
+            </p>
+        </fieldset>
+    }
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ClosedDates').datepicker({
+            format: "yyyy-mm-dd",
+            multidate: true
+        });
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

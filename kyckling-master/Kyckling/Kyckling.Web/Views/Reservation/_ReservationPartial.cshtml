@@ -1,0 +1,16 @@
+﻿@model Kyckling.Web.Models.ReservationModel
+
+<div class="col-md-3">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">@Model.Name - @Model.PersonCount personer</h3>
+        </div>
+        <div class="panel-body">
+            @Model.Restaurant.Name<br/>
+            @Model.TimeSlot.Date.ToShortDateString()<br />
+            @Model.TimeSlot.TimeOfDay - @Model.TimeSlot.AddHours(2).TimeOfDay<br />
+            @Model.Email<br />
+        </div>
+        @Html.ActionLink("Avboka", "CancelBooking", "Reservation", new { id = Model.Id}, new { @class = "btn btn-default" })
+    </div>
+</div>

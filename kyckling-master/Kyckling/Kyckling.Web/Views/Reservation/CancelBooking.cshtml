@@ -1,0 +1,44 @@
+﻿@model Kyckling.Web.Models.CancelReservationModel
+
+@{
+    ViewBag.Title = "CancelBooking";
+}
+
+<h2>CancelBooking</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>CancelReservationModel</legend>
+            @Html.HiddenFor(model => model.BookingId)
+            @Html.HiddenFor(model => model.Email)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Message)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Message)
+            @Html.ValidationMessageFor(model => model.Message)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SendMail)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.SendMail)
+        </div>
+
+        <p>
+            <input type="submit" value="Avboka" name="submitButton"/>
+            &nbsp;
+            <input type="submit" value="Avbryt" name="submitButton" />
+        </p>
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

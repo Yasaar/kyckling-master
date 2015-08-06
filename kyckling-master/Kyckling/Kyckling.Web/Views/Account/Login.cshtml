@@ -1,0 +1,45 @@
+﻿@model Kyckling.Web.Models.LoginModel
+
+@{
+    ViewBag.Title = "Logga in";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<div class="col-md-4">
+    <section id="loginForm">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Logga in</legend>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                </div>
+
+                <input type="submit" value="Logga in" />
+            </fieldset>
+            <p>
+                @Html.ActionLink("Registrera", "Register") dig om du inte har ett konto.
+            </p>
+    <p>
+        @Html.ActionLink("Glömt Lösenord", "ResetPassword")
+    </p>
+        }
+    </section>
+</div>

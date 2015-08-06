@@ -1,0 +1,54 @@
+﻿@model Kyckling.Web.Models.CreateReservationModel
+
+@{
+    ViewBag.Title = "Boka";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Boka bord på @Model.RestaurantName</h2>
+<div class="col-md-4">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.RestaurantId)
+        @Html.HiddenFor(m => m.PersonCount)
+        <fieldset>
+            <legend>Boka</legend>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Telephone)
+                @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Telephone)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PersonCount)
+                @Html.DisplayFor(m => m.PersonCount)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Date)
+                @Html.DisplayFor(m => m.Date.Date)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Time)
+                @Html.DropDownListFor(m => m.Time, Model.TimeSelectList, new { @class = "form-control" })
+            </div>
+
+            <p>
+                <input type="submit" value="Boka" class="btn btn-success" />
+            </p>
+        </fieldset>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

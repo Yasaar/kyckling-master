@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Sökresultat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sökresultat</h2>
+@model Kyckling.Web.Models.ListRestaurantsModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Restaurants.Count == 0)
+{
+    <p>Inga restauranger hittades</p>
+}
+@foreach (var restaurant in Model.Restaurants)
+{
+    <div class="col-md-4">
+        <div class="well">
+            <h2>@restaurant.Name<small>@restaurant.City</small></h2>
+            <img src="@restaurant.ImageUrl" class="img-responsive" />
+            <p>
+                @restaurant.Description
+            </p>
+            @Html.ActionLink("Visa info och boka", "Details", "Restaurant", new { id = restaurant.Id }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}

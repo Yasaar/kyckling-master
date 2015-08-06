@@ -1,0 +1,44 @@
+﻿@model Kyckling.Domain.Models.Reservation
+
+@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detaljer</h2>
+<div class="col-md-6">
+    <fieldset>
+        <legend>Reservation bekräftad!</legend>
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Restaurant.Name)</label>
+                <p class="form-control-static">@Html.DisplayFor(model => model.Restaurant.Name)</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Name)</label>
+                <p class="form-control-static">@Html.DisplayFor(model => model.Name)</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.TimeSlot)</label>
+                <p class="form-control-static">@Html.DisplayFor(model => model.TimeSlot)</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.PersonCount)</label>
+                <p class="form-control-static">@Html.DisplayFor(model => model.PersonCount)</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Email)</label>
+                <p class="form-control-static">@Html.DisplayFor(model => model.Email)</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Telephone)</label>
+                <p class="form-control-static">@Html.DisplayFor(model => model.Telephone)</p>
+            </div>
+
+        </form>
+    </fieldset>
+</div>
+<p>
+    @Html.ActionLink("Ny bokning", "SelectDate", "Reservation", new { id = Model.Restaurant.Id}, new{ @class = "btn btn-default"});
+    @Html.ActionLink("Hitta en annan restaurang", "Index", "Restaurant", null, new { @class = "btn btn-info" })
+</p>

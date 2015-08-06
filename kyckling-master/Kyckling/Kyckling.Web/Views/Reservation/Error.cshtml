@@ -1,0 +1,10 @@
+﻿@model Kyckling.Web.Models.ErrorViewModel
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Error</h2>
+<div class="jumbotron">@Model.Message</div>
+
+@Html.ActionLink("Välj ett annat datum", "SelectDate", "Reservation", new { id = Model.RestaurantId}, new { @class = "btn btn-primary"})

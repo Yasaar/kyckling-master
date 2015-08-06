@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Kyckling.Domain.Models.ReservationModel>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listar alla bokningar för en restaurang</h2>
+
+@foreach (var reservation in Model)
+{
+    <div class="col-md-4">
+        <h1>@reservation.Timeslot.StartTime - @reservation.Name - @reservation.PersonCount personer</h1>
+    </div>
+}

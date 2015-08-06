@@ -1,0 +1,63 @@
+﻿@model Kyckling.Web.Models.ListReservationsModel
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <h2>Listar bokningar - totalt @Model.TotalReservations stycken.</h2>
+        @*<div class="input-daterange" id="testDate">
+            <input value="@Model.FromDate.ToShortDateString()" class="form-control"/>
+            <input value="@Model.ToDate.ToShortDateString()" class="form-control" />
+        </div>*@
+    </div>
+    <div class="row">
+
+        @using (Html.BeginForm("List", "Reservation", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <fieldset>
+                <legend>Datumintervall</legend>
+                <div class="input-daterange" id="testDate">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.FromDate)
+                            @Html.TextBoxFor(x => x.FromDate, new {value = Model.FromDate.ToShortDateString(), name = "fromDate", @class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.ToDate)
+                            @Html.TextBoxFor(x => x.ToDate, new {value = Model.ToDate.ToShortDateString(), name = "toDate", @class = "form-control"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.DateSpan)
+                        <input type="submit" value="Visa bokningar" class="btn btn-success form-control" />
+                    </div>
+                    
+                </div>
+            </fieldset>
+        }
+    </div>
+
+    <div class="row">
+        @foreach (var r in Model.Reservations)
+        {
+            @Html.Partial("_ReservationPartial", r)
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var tDate = $('#testDate').datepicker({
+            format: 'yyyy-mm-dd'
+        }).data('datepicker');
+    });
+</script>
